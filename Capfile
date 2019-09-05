@@ -2,7 +2,7 @@ require 'rubygems'
 require 'capistrano-buildpack'
 
 set :normalize_asset_timestamps, false
-set :application, "ledger-app"
+set :application, "calendar-remixer"
 set :repository, "git@git.zrail.net:peter/calendar-remixer.git"
 set :scm, :git
 set :additional_domains, ['calendar-remixer.petekeen.net']
