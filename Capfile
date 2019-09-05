@@ -12,7 +12,7 @@ role :web, "kodos.zrail.net"
 set :buildpack_url, "git@git.zrail.net:peter/bugsplat-buildpack-ruby-shared"
 
 set :user,        "peter"
-set :concurrency, "web=1,load=1"
+set :concurrency, "web=1"
 set :base_port,   8300
 set :use_ssl, true
 set :force_ssl, true
