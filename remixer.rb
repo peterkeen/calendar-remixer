@@ -1,6 +1,7 @@
 require 'icalendar'
 require 'httparty'
 require 'pp'
+require 'digest'
 
 class Remixer
   def initialize(calendars)
@@ -18,13 +19,14 @@ class Remixer
 
       parsed.each do |cal|
         cal.events.each do |event|
-          new_event = Icalendar::Event.new
-          new_event.dtstart = event.dtstart
-          new_event.dtend = event.dtend
-          new_event.uid = event.uid
-          new_event.summary = calendar_options['summary']
+          event.summary = calendar_options['summary']
+          event.organizer = nil
+          event.description = nil
+          event.location = nil
+          event.attendee = nil
+          event.url = nil
           
-          new_cal.add_event(new_event)
+          new_cal.add_event(event)
         end
       end
     end
