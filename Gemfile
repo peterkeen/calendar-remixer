@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.4.2'
+
 gem 'dotenv', require: 'dotenv/load'
 gem 'icalendar'
 gem 'httparty'

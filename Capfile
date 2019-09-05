@@ -27,6 +27,6 @@ read_env 'prod'
 
 load 'deploy'
 
-task :deploy do
+after :deploy do
   top.upload('calendars.yaml', 'calendars.yaml')
 end
