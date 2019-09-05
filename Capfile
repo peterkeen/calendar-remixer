@@ -27,6 +27,6 @@ read_env 'prod'
 
 load 'deploy'
 
-after :deploy do
-  top.upload('calendars.yaml', 'calendars.yaml')
+before 'buildpack:foreman_export' do
+  top.upload('calendars.yaml', '/apps/calendar-remixer/shared/calendars.yaml')
 end
