@@ -8,7 +8,7 @@ get '/:code/calendar.ics' do
     status 404
     return ''
   end
-
+  content_type 'text/calendar'
   Remixer.new(calendars).remix
 end
 
