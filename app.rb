@@ -1,7 +1,11 @@
 require './remixer'
 require 'sinatra'
 
-calendars = YAML.load_file(ENV.fetch('CALENDARS_PATH', 'calendars.yaml'))
+if ENV['CALENDARS']
+  calendars = YAML.parse(ENV.fetch('CALENDARS'))
+else
+  calendars = YAML.load_file(ENV.fetch('CALENDARS_PATH', 'calendars.yaml'))
+end
 
 get '/:code/calendar.ics' do
   if params[:code] != ENV['SECURITY_CODE']
