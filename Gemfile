@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.4.2'
+ruby '2.6.4'
 
 gem 'dotenv', require: 'dotenv/load'
 gem 'icalendar'

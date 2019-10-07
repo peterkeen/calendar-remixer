@@ -16,7 +16,6 @@ COPY Gemfile Gemfile.lock $APP_ROOT/
 
 RUN bundle config --global frozen 1 \
     && bundle install --without development:test:assets -j4 --retry 3 \
-    && bundle binstubs puma rake\
     # Remove unneeded files (cached *.gem, *.o, *.c)
     && rm -rf /usr/local/bundle/ruby/2.6.0/cache/*.gem
 
