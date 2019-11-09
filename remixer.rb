@@ -19,6 +19,10 @@ class Remixer
 
       parsed.each do |cal|
         cal.events.each do |event|
+          if calendar_options['skip']
+            next if event.summary =~ /#{calendar_options['skip']}/i
+          end
+
           event.summary = calendar_options['summary']
           event.organizer = nil
           event.description = nil
