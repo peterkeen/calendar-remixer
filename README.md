@@ -24,3 +24,12 @@ The allowed options are:
 * `summary` overrides the `summary` field of each calendar event. This is the event name. All other fields in the calendar entry will be stripped.
 * `skip` specifies a regular expression to use for skipping events. The regular expression will match against the event summary field.
 
+## Accessing the Remixed Calendar
+
+The remixed calendar is available at this path:
+
+```
+/SECURITY_CODE/calendar.ics
+```
+
+where `SECURITY_CODE` is the value of the `SECURITY_CODE` environment variable.
