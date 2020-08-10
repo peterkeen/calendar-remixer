@@ -1,0 +1,16 @@
+{
+    "name": "Calendar Remixer",
+    "description": "Scrub, filter, and mix multiple calendars into one iCal feed",
+    "repository": "https://github.com/peterkeen/calendar-remixer",
+    "env": {
+        "SECURITY_CODE": {
+            "description": "A secret key for the remixed calendar URL",
+            "required": true,
+            "generator": "secret"
+        },
+        "CALENDARS": {
+            "description": "YAML describing the calendars you wish to remix",
+            "required": true
+        }
+    }
+}
