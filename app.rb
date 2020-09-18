@@ -1,5 +1,6 @@
 require './remixer'
 require 'sinatra'
+require 'sinatra/streaming'
 
 if ENV['CALENDARS']
   calendars = YAML.load(ENV.fetch('CALENDARS'))
@@ -12,7 +13,12 @@ get '/:code/calendar.ics' do
     status 404
     return ''
   end
+
   content_type 'text/calendar'
-  Remixer.new(calendars).remix
+
+  stream do |out|
+    out.write("\n")
+    out.write(Remixer.new(calendars).remix)
+  end
 end
 
