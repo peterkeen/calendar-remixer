@@ -11,6 +11,8 @@ RUN apk update \
     && apk upgrade \
     && apk add --update --no-cache $BUILD_PACKAGES $DEV_PACKAGES $RUBY_PACKAGES
 
+RUN gem install bundler:2.1.4
+
 COPY Gemfile* ./
 COPY Gemfile Gemfile.lock $APP_ROOT/
 
