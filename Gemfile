@@ -12,3 +12,4 @@ gem 'puma'
 
 gem "capistrano", '2.15.4'
 gem "capistrano-buildpack", '0.0.18'
+gem "rufus-scheduler", ">= 3.6.0"

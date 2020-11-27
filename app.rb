@@ -1,24 +1,38 @@
 require './remixer'
-require 'sinatra'
-require 'sinatra/streaming'
+require 'rufus-scheduler'
+require 'sinatra/base'
 
-if ENV['CALENDARS']
-  calendars = YAML.load(ENV.fetch('CALENDARS'))
-else
-  calendars = YAML.load_file(ENV.fetch('CALENDARS_PATH', 'calendars.yaml'))
-end
+class RemixerApp < Sinatra::Base
+  def initialize
+    super
 
-get '/:code/calendar.ics' do
-  if params[:code] != ENV['SECURITY_CODE']
-    status 404
-    return ''
+    @rendered_calendar = ""
+
+    if ENV['CALENDARS']
+      @calendars = YAML.load(ENV.fetch('CALENDARS'))
+    else
+      @calendars = YAML.load_file(ENV.fetch('CALENDARS_PATH', 'calendars.yaml'))
+    end
+
+    scheduler = Rufus::Scheduler.new
+    scheduler.every '5m', first_in: '1s' do
+      puts "Rendering calendar..."
+      @rendered_calendar = Remixer.new(@calendars).remix
+      puts "Done rendering calendar!"
+    end
   end
 
-  content_type 'text/calendar'
+  get '/:code/calendar.ics' do
+    if params[:code] != ENV['SECURITY_CODE']
+      status 404
+      return ''
+    end
 
-  stream do |out|
-    out.write("\n")
-    out.write(Remixer.new(calendars).remix)
+    content_type 'text/calendar'
+
+    @rendered_calendar
   end
+
+  run! if app_file == $0
 end
 
